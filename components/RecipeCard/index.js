@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Recipe({ recipe }) {
-  const { title, slug, cookingTime, thumbnail } = recipe.fields;
+  const { cookingTime, slug, thumbnail, title } = recipe.fields;
   const { file } = thumbnail.fields;
   return (
     <>
