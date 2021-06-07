@@ -1,5 +1,8 @@
-import { createClient } from 'contentful';
 import Head from 'next/head';
+
+import { client } from 'utils/contentfulClient';
+
+import RecipeCard from 'components/RecipeCard';
 
 export default function Recipes({ recipes }) {
   return (
@@ -8,16 +11,28 @@ export default function Recipes({ recipes }) {
         <title>Home | Recipe-app</title>
         <meta name='description' content='recipes homepage' />
       </Head>
-      <div className='recipe-list'>Recipe List</div>
+      <div className='recipe-list'>
+        {recipes.map(recipe => (
+          <RecipeCard key={recipe.sys.id} recipe={recipe} />
+        ))}
+        <style jsx>{`
+          .recipe-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-gap: 20px 60px;
+          }
+          @media screen and (min-width: 600px) {
+            .recipe-list {
+              grid-template-columns: 1fr 1fr;
+            }
+          }
+        `}</style>
+      </div>
     </>
   );
 }
 
 export async function getStaticProps() {
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_ACCESSTOKEN,
-  });
   const res = await client.getEntries({ content_type: 'recipe' });
   return {
     props: { recipes: res.items },
