@@ -8,7 +8,7 @@ export default function Recipes({ recipes }) {
   return (
     <>
       <Head>
-        <title>Home | Recipe-app</title>
+        <title>Inicio | Recipe-app</title>
         <meta name='description' content='recipes homepage' />
       </Head>
       <div className='recipe-list'>

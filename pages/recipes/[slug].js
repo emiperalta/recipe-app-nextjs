@@ -23,8 +23,8 @@ export default function RecipeDetails({ recipe }) {
           <h2>{title}</h2>
         </div>
         <div className='info'>
-          <p>Take about {cookingTime} mins to cook.</p>
-          <h3>Ingredients: </h3>
+          <p>Tarda unos {cookingTime} mins en cocinarse.</p>
+          <h3>Ingredientes: </h3>
           <ul>
             {ingredients.map(ing => (
               <li key={ing}>{ing}</li>
@@ -32,7 +32,7 @@ export default function RecipeDetails({ recipe }) {
           </ul>
         </div>
         <div className='method'>
-          <h3>Method: </h3>
+          <h3>Método: </h3>
           <div>{documentToReactComponents(method)}</div>
         </div>
       </div>
