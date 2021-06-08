@@ -6,7 +6,16 @@ import Recipe from 'components/Recipe';
 import Skeleton from 'components/Skeleton';
 
 export default function RecipeDetails({ recipe }) {
-  if (!recipe) return <Skeleton />;
+  if (!recipe)
+    return (
+      <>
+        <Head>
+          <title>Loading | Recipe-app</title>
+          <meta name='description' content='loading content' />a
+        </Head>
+        <Skeleton />
+      </>
+    );
 
   const { title } = recipe.fields;
 
@@ -37,6 +46,14 @@ export async function getStaticProps(context) {
     content_type: 'recipe',
     'fields.slug': slug,
   });
+  if (!recipe.items.length) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
   return {
     props: { recipe: recipe.items[0] },
     revalidate: 1,
